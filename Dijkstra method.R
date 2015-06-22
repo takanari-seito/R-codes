@@ -1,23 +1,28 @@
-#最短距離問題のダイクストラ法による解放
+#最短距離問題のダイクストラ法による解法
 #input	:n*nの距離行列
 #output	:スタート点sからの各点への最短距離(label;NAは到達不可能)とパス(path)
 
 #n*nの距離行列をエクセルから取得する
 data=read.table("spp1.txt");
 
-#nを点距離行列のサイズ(点数)nrow(data)に設定する
+#nを距離行列のサイズ(点数)nrow(data)に設定する
 n=nrow(data);
+
+rownames(data)=c(1:n);
+colnames(data)=c(1:n);
 
 #各点に対応するサイズnのラベルベクトルlabelを定義する(要素はすべてNA)
 label=matrix(ncol=n);
+colnames(label)=c(1:n);
 for(i in 1:n){label[i]=NA};
 
 #各点に対応するサイズnのパズベクトルpathを定義する(要素は各点)
 path=matrix(ncol=n);
+colnames(path)=c(1:n);
 for(i in 1:n){path[i]=i};
 
-#スタート点の設定、スタート点のラベルベクトルlabel[s]を0に設定する
-s=6;
+#スタート点sの設定、スタート点sのラベルベクトルlabel[s]を0に設定する
+s=1;
 label[s]=0;
 
 x=0;
@@ -34,13 +39,16 @@ while(is.finite(x)){
 					y=label[i]+data[i,j];
 					#最小値を求める
 					z=min(x,y);
-					#最小値となった組み合わせに対して点iと点a,点jを点bとする
+					#最小値となった組み合わせに対して点iと点a,点jを点bに更新する
 					if(x>y){a=i;b=j};
 					x=z;
-	};	};	};	};
-	#最小値となった点bのラベルlabel[b]をその最小値の値とする
+				};	
+			};	
+		};	
+	};
+	#点bのラベルlabel[b]をその最小値の値とする
 	label[b]=x;
-	#最小値となった点bのパスpath[b]に点aのパスpath[a]を左から加える
+	#点bへのパスpath[b]に点aへのパスpath[a]を左から加える
 	path[b]=paste(path[a],path[b]);
 };
 
@@ -48,5 +56,5 @@ cat("距離行列");cat("\n");
 print(data);
 cat("スタート点");cat(s);cat("からの各点への最短距離");cat("\n");
 print(label);
-cat("道順");cat("\n");
+cat("パス");cat("\n");
 print(path);
