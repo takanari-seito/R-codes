@@ -1,7 +1,0 @@
-Inf	7	16	13	Inf	Inf	Inf
-Inf	Inf	Inf	9	1	Inf	Inf
-Inf	Inf	Inf	2	Inf	10	Inf
-Inf	8	Inf	Inf	4	7	18
-Inf	2	Inf	4	Inf	Inf	30
-Inf	Inf	14	4	Inf	Inf	7
-Inf	Inf	Inf	Inf	Inf	Inf	Inf
